@@ -1,126 +1,87 @@
 import { Link } from 'react-router-dom'
 import { ProgressBar } from '../components/ProgressBar'
+import { archiveItems } from '../data/archive'
 import { flashcards } from '../data/flashcards'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
-type IconName = 'cards' | 'timeline' | 'quiz' | 'arrow'
+const milestones = ['1890', '1911', '1920', '1930', '1941', '1945', '1969']
 
-function Icon({ name }: { name: IconName }) {
-  if (name === 'cards') {
-    return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2" /><path d="M9 7h6M9 11h6M9 15h4" /></svg>
-  }
-  if (name === 'timeline') {
-    return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4v16M5 7h5l2 3h7M5 16h5l2-3h7" /><circle cx="5" cy="7" r="2" /><circle cx="5" cy="16" r="2" /></svg>
-  }
-  if (name === 'quiz') {
-    return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a2 2 0 0 1 2 2v16l-7-3-7 3V5a2 2 0 0 1 2-2Z" /><path d="M9.5 9a2.5 2.5 0 1 1 3.4 2.3c-.9.4-.9 1.2-.9 1.7M12 15.8v.2" /></svg>
-  }
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" /></svg>
-}
-
-const features = [
-  {
-    number: '01',
-    icon: 'cards' as const,
-    title: 'Flashcards',
-    description: 'Ghi nhớ 72 chủ đề trọng tâm, cân bằng 12 thẻ cho mỗi chương và tự đánh dấu tiến độ.',
-    to: '/flashcards',
-    label: 'Bắt đầu ghi nhớ',
-  },
-  {
-    number: '02',
-    icon: 'timeline' as const,
-    title: 'Dòng thời gian',
-    description: 'Theo dõi 5 giai đoạn hình thành và phát triển tư tưởng Hồ Chí Minh.',
-    to: '/timeline',
-    label: 'Khám phá hành trình',
-  },
-  {
-    number: '03',
-    icon: 'quiz' as const,
-    title: 'Quiz kiến thức',
-    description: 'Tự kiểm tra với ngân hàng 150 câu hỏi cân bằng theo 6 chương, có giải thích sau mỗi đáp án.',
-    to: '/quiz',
-    label: 'Kiểm tra ngay',
-  },
+const studyPaths = [
+  { number: '01', label: 'Đọc lịch sử', title: 'Hành trình tư tưởng', description: 'Theo dõi năm giai đoạn qua sự kiện, bối cảnh và sự hình thành tư tưởng.', to: '/timeline', meta: '05 giai đoạn' },
+  { number: '02', label: 'Xem chứng tích', title: 'Phòng tư liệu số', description: 'Khám phá ảnh, văn kiện, phim và âm thanh có nguồn dẫn rõ ràng.', to: '/archive', meta: 'Ảnh · Văn kiện · Phim' },
+  { number: '03', label: 'Ôn và kiểm tra', title: 'Flashcard & trắc nghiệm', description: 'Ghi nhớ 72 chủ đề và luyện với ngân hàng 150 câu hỏi có giải thích.', to: '/flashcards', meta: '72 thẻ · 150 câu' },
 ]
 
 export function HomePage() {
   const [knownCards] = useLocalStorage<string[]>('knownCards', [])
   const [bestQuizScore] = useLocalStorage<number>('bestQuizScore', 0)
+  const featured = archiveItems.slice(0, 3)
 
   return (
     <>
-      <section className="hero section-shell">
-        <div className="hero-copy">
-          <span className="hero-kicker"><span /> Nền tảng ôn tập HCM202</span>
-          <h1>Học để nhớ.<br /><em>Hiểu để vận dụng.</em></h1>
-          <p>
-            Khám phá những nội dung trọng tâm của Tư tưởng Hồ Chí Minh qua một hành trình học tập ngắn gọn, trực quan và có hệ thống.
-          </p>
+      <section className="museum-hero section-shell">
+        <div className="museum-hero-copy">
+          <span className="hero-kicker"><span /> HCM202 · Tư tưởng Hồ Chí Minh</span>
+          <h1>Hành trình<br /><em>tư tưởng</em></h1>
+          <p>Từ những cơ sở hình thành đến quá trình phát triển của tư tưởng Hồ Chí Minh qua các bước ngoặt của lịch sử Việt Nam.</p>
           <div className="hero-actions">
-            <Link className="button primary" to="/flashcards">Bắt đầu học <Icon name="arrow" /></Link>
-            <Link className="text-link" to="/timeline">Xem dòng thời gian <span aria-hidden="true">↗</span></Link>
-          </div>
-          <div className="hero-meta" aria-label="Nội dung nền tảng">
-            <span><strong>72</strong> thẻ ghi nhớ</span>
-            <span><strong>05</strong> giai đoạn</span>
-            <span><strong>150</strong> câu hỏi</span>
+            <Link className="button primary" to="/timeline">Bắt đầu hành trình <span aria-hidden="true">→</span></Link>
+            <Link className="text-link" to="/archive">Vào phòng tư liệu <span aria-hidden="true">↗</span></Link>
           </div>
         </div>
-
-        <div className="hero-visual" aria-hidden="true">
-          <div className="sun-disc" />
-          <div className="quote-card">
-            <span className="quote-mark">“</span>
-            <p>Học để làm việc,<br />làm người, làm cán bộ.</p>
-            <span className="quote-rule" />
-            <small>Hồ Chí Minh</small>
-          </div>
-          <div className="year-stamp">1890 <span>—</span> 1969</div>
-          <div className="hero-lines" />
-        </div>
+        <figure className="museum-hero-image">
+          <span className="hero-ghost-year" aria-hidden="true">1945</span>
+          <img src="/images/archive/ba-dinh-1945.jpg" alt="Lễ Độc lập tại Quảng trường Ba Đình ngày 2 tháng 9 năm 1945" />
+          <figcaption><span>02.09.1945 · Hà Nội</span><a href={archiveItems[3].sourceUrl} target="_blank" rel="noreferrer">Nguồn ↗</a></figcaption>
+        </figure>
       </section>
 
-      <section className="features-section">
+      <div className="journey-rail" aria-label="Các mốc chính của hành trình">
+        <div className="section-shell">
+          {milestones.map((year, index) => <span className={year === '1945' ? 'active' : ''} key={year}><i />{year}{index < milestones.length - 1 && <b aria-hidden="true" />}</span>)}
+        </div>
+      </div>
+
+      <section className="manifesto-section section-shell">
+        <span className="quote-glyph" aria-hidden="true">“</span>
+        <blockquote><p>Không có gì quý hơn độc lập, tự do.</p><footer>Hồ Chí Minh · Lời kêu gọi chống Mỹ, cứu nước · 1966</footer></blockquote>
+        <p className="manifesto-note">Một mệnh đề cô đọng tư tưởng xuyên suốt về độc lập dân tộc, quyền tự do và ý chí tự quyết.</p>
+      </section>
+
+      <section className="featured-archive">
         <div className="section-shell">
           <header className="section-heading split">
-            <div>
-              <span className="eyebrow">Ba bước học tập</span>
-              <h2>Một hành trình, ba cách tiếp cận</h2>
-            </div>
-            <p>Mỗi loại kiến thức được đặt vào hình thức học phù hợp để bạn nhớ lâu hơn và hiểu rõ hơn.</p>
+            <div><span className="eyebrow">Hiện vật tiêu biểu</span><h2>Lịch sử để lại dấu vết</h2></div>
+            <p>Mỗi bức ảnh và văn kiện giúp kết nối khái niệm trong giáo trình với con người, địa điểm và thời điểm cụ thể.</p>
           </header>
-          <div className="feature-grid">
-            {features.map((feature) => (
-              <article className="feature-card" key={feature.title}>
-                <div className="feature-card-top">
-                  <span className="feature-icon"><Icon name={feature.icon} /></span>
-                  <span className="feature-number">{feature.number}</span>
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-                <Link to={feature.to}>{feature.label} <Icon name="arrow" /></Link>
-              </article>
+          <div className="featured-archive-grid">
+            {featured.map((item, index) => (
+              <Link to="/archive" className={`featured-piece piece-${index + 1}`} key={item.id}>
+                <img src={item.image} alt={item.imageAlt} loading={index === 0 ? 'eager' : 'lazy'} />
+                <span><small>{item.kind} · {item.year}</small><strong>{item.title}</strong><b>Xem hiện vật ↗</b></span>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
+      <section className="study-paths section-shell">
+        <header><span className="eyebrow">Cách khám phá</span><h2>Đọc. Xem. Ghi nhớ.</h2></header>
+        <div className="study-path-list">
+          {studyPaths.map((path) => (
+            <Link to={path.to} key={path.number}>
+              <span className="path-number">{path.number}</span>
+              <span><small>{path.label}</small><strong>{path.title}</strong><p>{path.description}</p></span>
+              <span className="path-meta">{path.meta}</span><b aria-hidden="true">→</b>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="progress-section section-shell">
         <div className="progress-panel">
-          <div className="progress-intro">
-            <span className="eyebrow light">Tiến độ của bạn</span>
-            <h2>Mỗi lần ôn là một bước tiến.</h2>
-            <p>Tiến độ được lưu ngay trên trình duyệt này, không cần tài khoản.</p>
-          </div>
-          <div className="progress-stats">
-            <ProgressBar value={knownCards.length} max={flashcards.length} label="Flashcards đã thuộc" />
-            <div className="best-score-row">
-              <span>Điểm quiz tốt nhất</span>
-              <strong>{bestQuizScore}<small>/ 10</small></strong>
-            </div>
-          </div>
+          <div className="progress-intro"><span className="eyebrow light">Tiến độ của bạn</span><h2>Mỗi lần ôn là một bước tiến.</h2><p>Tiến độ được lưu ngay trên trình duyệt này, không cần tài khoản.</p></div>
+          <div className="progress-stats"><ProgressBar value={knownCards.length} max={flashcards.length} label="Flashcards đã thuộc" /><div className="best-score-row"><span>Điểm quiz tốt nhất</span><strong>{bestQuizScore}<small>/ 10</small></strong></div></div>
         </div>
       </section>
     </>

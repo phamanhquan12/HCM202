@@ -1,17 +1,18 @@
 # Hành Trình Tư Tưởng
 
-Nền tảng ôn tập trực quan cho học phần HCM202, giúp sinh viên học Tư tưởng Hồ Chí Minh theo ba bước: **nhớ khái niệm → hiểu tiến trình → tự kiểm tra**.
+Triển lãm học tập số cho học phần HCM202, giúp sinh viên khám phá Tư tưởng Hồ Chí Minh theo bốn bước: **đọc tiến trình → xem tư liệu → nhớ khái niệm → tự kiểm tra**.
 
 ## Chức năng
 
 - 72 flashcard chuyên sâu, cân bằng 12 thẻ cho mỗi chương, có lọc, trộn thẻ và đánh dấu đã thuộc/cần ôn.
-- Dòng thời gian gồm 5 giai đoạn hình thành và phát triển tư tưởng Hồ Chí Minh.
+- Hành trình gồm 5 giai đoạn, tách rõ sự kiện, bối cảnh lịch sử và sự hình thành tư tưởng.
+- Phòng tư liệu số với ảnh, văn kiện, phim và âm thanh; từng hiện vật có chú thích, nguồn và tình trạng bản quyền.
 - Ngân hàng 150 câu hỏi trắc nghiệm, cân bằng 25 câu cho mỗi chương và có giải thích ngay sau khi trả lời.
 - Chế độ luyện tổng hợp 30 câu, làm đủ 25 câu theo chương hoặc thử sức với toàn bộ 150 câu.
 - Lưu tiến độ flashcard và điểm quiz tốt nhất bằng `localStorage`; không cần tài khoản hay máy chủ.
-- Giao diện đáp ứng cho máy tính, máy tính bảng và điện thoại.
+- Giao diện triển lãm lịch sử đáp ứng cho máy tính, máy tính bảng và điện thoại.
 
-Nội dung được tổng hợp từ *Giáo trình Tư tưởng Hồ Chí Minh* dành cho bậc đại học hệ không chuyên lý luận chính trị, NXB Chính trị quốc gia Sự thật, 2021. Sản phẩm phục vụ mục đích học tập.
+Nội dung học thuật được tổng hợp từ *Giáo trình Tư tưởng Hồ Chí Minh* dành cho bậc đại học hệ không chuyên lý luận chính trị, NXB Chính trị quốc gia Sự thật, 2021. Tư liệu lịch sử lấy từ Wikimedia Commons, Gallica/Thư viện Quốc gia Pháp, Trung tâm Lưu trữ quốc gia III và Center of Military History; nội dung nghe nhìn liên kết tới VTV và kho lưu trữ gốc. Tất cả hiện vật sử dụng trực tiếp đều có thông tin nguồn và giấy phép trên trang `/archive`. Sản phẩm phục vụ mục đích học tập.
 
 ## Chạy trên máy cá nhân
 
@@ -43,7 +44,7 @@ Có thể import trực tiếp repository này vào Vercel. Vercel sẽ tự nh�
 - Build command: `npm run build`
 - Output directory: `dist`
 
-Tệp `vercel.json` đã cấu hình fallback về `index.html` để các route như `/flashcards`, `/timeline` và `/quiz` hoạt động khi truy cập trực tiếp.
+Tệp `vercel.json` đã cấu hình fallback về `index.html` để các route như `/archive`, `/flashcards`, `/timeline` và `/quiz` hoạt động khi truy cập trực tiếp.
 
 Nếu dùng Vercel CLI:
 

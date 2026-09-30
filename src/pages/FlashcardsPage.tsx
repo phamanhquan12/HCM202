@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Flashcard } from '../components/Flashcard'
 import { PageHeader } from '../components/PageHeader'
 import { ProgressBar } from '../components/ProgressBar'
@@ -7,7 +8,9 @@ import { useLocalStorage } from '../hooks/useLocalStorage'
 import { shuffle } from '../utils/shuffle'
 
 export function FlashcardsPage() {
-  const [chapter, setChapter] = useState(0)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const initialChapter = Number(searchParams.get('chapter'))
+  const [chapter, setChapter] = useState(initialChapter >= 1 && initialChapter <= 6 ? initialChapter : 0)
   const [current, setCurrent] = useState(0)
   const [cardOrder, setCardOrder] = useState(() => flashcards.map((card) => card.id))
   const [knownCards, setKnownCards] = useLocalStorage<string[]>('knownCards', [])
@@ -27,6 +30,7 @@ export function FlashcardsPage() {
 
   const changeChapter = (nextChapter: number) => {
     setChapter(nextChapter)
+    setSearchParams(nextChapter ? { chapter: String(nextChapter) } : {})
     setCurrent(0)
   }
 

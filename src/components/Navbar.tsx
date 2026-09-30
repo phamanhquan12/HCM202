@@ -3,9 +3,10 @@ import { Link, NavLink } from 'react-router-dom'
 
 const links = [
   { to: '/', label: 'Trang chủ' },
-  { to: '/flashcards', label: 'Flashcards' },
-  { to: '/timeline', label: 'Timeline' },
-  { to: '/quiz', label: 'Quiz' },
+  { to: '/timeline', label: 'Hành trình' },
+  { to: '/archive', label: 'Tư liệu' },
+  { to: '/flashcards', label: 'Ghi nhớ' },
+  { to: '/quiz', label: 'Trắc nghiệm' },
   { to: '/about', label: 'Về dự án' },
 ]
 

@@ -19,6 +19,12 @@ export type TimelineStage = {
   period: string
   title: string
   summary: string
+  context: string
+  thought: string
+  image?: string
+  imageAlt?: string
+  imageCaption?: string
+  sourceUrl?: string
   events: TimelineEvent[]
 }
 

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { PageHeader } from '../components/PageHeader'
 import { ProgressBar } from '../components/ProgressBar'
 import { QuizQuestion } from '../components/QuizQuestion'
@@ -76,8 +77,8 @@ export function QuizPage() {
       <main className="page-main section-shell">
         <PageHeader
           eyebrow="Tự kiểm tra kiến thức"
-          title="Quiz"
-          description="Chọn phạm vi, trả lời từng câu và xem giải thích ngay để hiểu vì sao đáp án đúng."
+          title="Kiểm tra hành trình"
+          description="Chọn phạm vi, trả lời từng câu và xem giải thích ngay. Khi cần, bạn có thể trở lại hành trình hoặc flashcard để đọc lại bối cảnh."
           count="150 câu hỏi"
         />
         <section className="quiz-setup">
@@ -167,6 +168,9 @@ export function QuizPage() {
             <strong>{isCorrect ? '✓ Chính xác' : '× Chưa đúng'}</strong>
             <p>{question.explanation}</p>
             <small>Nguồn: {question.source}</small>
+            <Link className="feedback-review-link" to={question.chapter === 2 ? '/timeline' : `/flashcards?chapter=${question.chapter}`}>
+              {question.chapter === 2 ? 'Xem lại hành trình hình thành tư tưởng' : `Ôn lại flashcard Chương ${question.chapter}`} <span aria-hidden="true">→</span>
+            </Link>
           </div>
         )}
         <div className="quiz-card-footer">
