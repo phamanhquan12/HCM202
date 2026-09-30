@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vercel/
+*.local
+.DS_Store
+
+# Local course source material supplied for implementation review.
+HCM202_Web_Project_Spec.md
+*.pdf
