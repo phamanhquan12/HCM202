@@ -8,8 +8,9 @@ const milestones = ['1890', '1911', '1920', '1930', '1941', '1945', '1969']
 
 const studyPaths = [
   { number: '01', label: 'Đọc lịch sử', title: 'Hành trình tư tưởng', description: 'Theo dõi năm giai đoạn qua sự kiện, bối cảnh và sự hình thành tư tưởng.', to: '/timeline', meta: '05 giai đoạn' },
-  { number: '02', label: 'Xem chứng tích', title: 'Phòng tư liệu số', description: 'Khám phá ảnh, văn kiện, phim và âm thanh có nguồn dẫn rõ ràng.', to: '/archive', meta: 'Ảnh · Văn kiện · Phim' },
-  { number: '03', label: 'Ôn và kiểm tra', title: 'Flashcard & trắc nghiệm', description: 'Ghi nhớ 72 chủ đề và luyện với ngân hàng 150 câu hỏi có giải thích.', to: '/flashcards', meta: '72 thẻ · 150 câu' },
+  { number: '02', label: 'Hiểu nội dung', title: 'Hệ thống tư tưởng', description: 'Kết nối độc lập, Nhà nước, đoàn kết, văn hóa, đạo đức và con người.', to: '/ideas', meta: '06 chủ đề' },
+  { number: '03', label: 'Xem chứng tích', title: 'Phòng tư liệu số', description: 'Khám phá ảnh, văn kiện, phim và âm thanh có nguồn dẫn rõ ràng.', to: '/archive', meta: 'Ảnh · Văn kiện · Phim' },
+  { number: '04', label: 'Ôn và kiểm tra', title: 'Flashcard & trắc nghiệm', description: 'Ghi nhớ 72 chủ đề và luyện với ngân hàng 150 câu hỏi có giải thích.', to: '/flashcards', meta: '72 thẻ · 150 câu' },
 ]
 
 export function HomePage() {
@@ -41,6 +42,14 @@ export function HomePage() {
           {milestones.map((year, index) => <span className={year === '1945' ? 'active' : ''} key={year}><i />{year}{index < milestones.length - 1 && <b aria-hidden="true" />}</span>)}
         </div>
       </div>
+
+      <section className="home-dimensions section-shell">
+        <header><span className="eyebrow">Hai chiều khám phá</span><h2>Một hành trình qua thời gian.<br />Một hệ thống của các ý tưởng.</h2></header>
+        <div>
+          <Link to="/timeline"><span>01</span><small>Khi nào · Bằng cách nào</small><strong>Hành trình lịch sử</strong><p>Năm giai đoạn cho thấy tư tưởng hình thành, được thử thách và hiện thực hóa trong cách mạng Việt Nam.</p><b>Đi theo dòng thời gian →</b></Link>
+          <Link to="/ideas"><span>02</span><small>Nội dung · Mối liên hệ</small><strong>Hệ thống tư tưởng</strong><p>Sáu chủ đề lớn cho thấy độc lập, nhân dân, đoàn kết, văn hóa, đạo đức và con người liên kết với nhau ra sao.</p><b>Mở bản đồ tư tưởng →</b></Link>
+        </div>
+      </section>
 
       <section className="manifesto-section section-shell">
         <span className="quote-glyph" aria-hidden="true">“</span>
