@@ -28,13 +28,14 @@ export function Flashcard({ card, status }: Props) {
 
       {!flipped ? (
         <span className="flashcard-front">
-          <span className="eyebrow">Khái niệm trọng tâm</span>
+          <span className="eyebrow">Câu hỏi gợi nhớ</span>
+          <span className="card-term">{card.term}</span>
           <strong>{card.front}</strong>
-          <span className="flip-hint">Nhấn để xem giải thích <span aria-hidden="true">↗</span></span>
+          <span className="flip-hint">Tự trả lời, sau đó nhấn để kiểm tra <span aria-hidden="true">↗</span></span>
         </span>
       ) : (
         <span className="flashcard-back">
-          <span className="eyebrow">{card.term}</span>
+          <span className="eyebrow">Câu trả lời · {card.term}</span>
           <strong>{card.back}</strong>
           {card.note && <span className="card-note"><b>Ghi nhớ:</b> {card.note}</span>}
           {card.source && <span className="card-source">Nguồn: {card.source}</span>}

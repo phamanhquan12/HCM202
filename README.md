@@ -6,7 +6,7 @@ Nền tảng ôn tập trực quan cho học phần HCM202, giúp sinh viên h�
 
 - 41 flashcard thuộc 6 chương, có lọc theo chương, trộn thẻ, chuyển thẻ và đánh dấu đã thuộc/cần ôn.
 - Dòng thời gian gồm 5 giai đoạn hình thành và phát triển tư tưởng Hồ Chí Minh.
-- 24 câu hỏi trắc nghiệm; mỗi lượt tổng hợp lấy ngẫu nhiên 10 câu, hiển thị giải thích ngay sau khi trả lời.
+- 24 câu hỏi trắc nghiệm trong bài tổng hợp; thứ tự được trộn ở mỗi lượt và có giải thích ngay sau khi trả lời.
 - Lưu tiến độ flashcard và điểm quiz tốt nhất bằng `localStorage`; không cần tài khoản hay máy chủ.
 - Giao diện đáp ứng cho máy tính, máy tính bảng và điện thoại.
 

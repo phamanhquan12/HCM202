@@ -39,7 +39,7 @@ const features = [
     number: '03',
     icon: 'quiz' as const,
     title: 'Quiz kiến thức',
-    description: 'Tự kiểm tra với 10 câu hỏi ngẫu nhiên và xem giải thích ngay sau mỗi câu.',
+    description: 'Tự kiểm tra trọn bộ 24 câu hỏi và xem giải thích ngay sau mỗi câu trả lời.',
     to: '/quiz',
     label: 'Kiểm tra ngay',
   },

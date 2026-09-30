@@ -23,7 +23,7 @@ export function QuizPage() {
 
   const startQuiz = () => {
     const pool = chapter === 0 ? quizQuestions : quizQuestions.filter((question) => question.chapter === chapter)
-    setQuestions(shuffle(pool).slice(0, 10))
+    setQuestions(shuffle(pool))
     setCurrent(0)
     setSelected(null)
     setSubmitted(false)
@@ -76,7 +76,7 @@ export function QuizPage() {
             <span className="eyebrow light">Sẵn sàng chưa?</span>
             <h2>Một lượt ôn tập ngắn,<br />một bước hiểu sâu hơn.</h2>
             <div className="quiz-rules">
-              <span><b>01</b> Tối đa 10 câu ngẫu nhiên</span>
+              <span><b>01</b> Đủ câu hỏi trong phạm vi đã chọn</span>
               <span><b>02</b> Giải thích sau mỗi câu</span>
               <span><b>03</b> Lưu điểm tốt nhất</span>
             </div>
@@ -85,15 +85,17 @@ export function QuizPage() {
             <label className="select-field">
               <span>Phạm vi câu hỏi</span>
               <select value={chapter} onChange={(event) => setChapter(Number(event.target.value))}>
-                <option value={0}>Tổng hợp 6 chương · 10 câu</option>
+                <option value={0}>Tổng hợp 6 chương · 24 câu</option>
                 {Object.entries(chapterNames).map(([number, name]) => (
-                  <option value={number} key={number}>Chương {number} · {name}</option>
+                  <option value={number} key={number}>
+                    Chương {number} · {name} · {quizQuestions.filter((question) => question.chapter === Number(number)).length} câu
+                  </option>
                 ))}
               </select>
             </label>
-            <p>Quiz theo chương sẽ dùng toàn bộ câu hỏi hiện có của chương đó, tối đa 10 câu.</p>
+            <p>Thứ tự câu hỏi được trộn ở mỗi lượt. Bài tổng hợp luôn có đủ 24 câu; bài theo chương dùng toàn bộ câu hỏi của chương đó.</p>
             <button className="button primary full" type="button" onClick={startQuiz}>Bắt đầu làm bài <span aria-hidden="true">→</span></button>
-            <div className="best-score-note">Điểm tốt nhất trên thiết bị này <strong>{bestScore} / 10</strong></div>
+            <div className="best-score-note">Điểm tốt nhất quy đổi trên thiết bị này <strong>{bestScore} / 10</strong></div>
           </div>
         </section>
       </main>
