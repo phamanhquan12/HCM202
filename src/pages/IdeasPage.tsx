@@ -83,7 +83,7 @@ export function IdeasPage() {
 
       <section className="inner-enemy" id="giac-noi-xam">
         <div className="section-shell">
-          <header><span className="eyebrow light">Chuyên đề · Module 1</span><div><h2>“Giặc ở bên trong”</h2><p>Một góc nhìn về tham ô, lãng phí và quan liêu</p></div></header>
+          <header><span className="eyebrow light">Module 1</span><div><h2>“Giặc ở bên trong”</h2><p>Một góc nhìn về tham ô, lãng phí và quan liêu</p></div></header>
           <div className="corruption-flow" aria-label="Chuỗi nguyên nhân và hệ quả của tham ô, lãng phí, quan liêu">
             <article><small>Nguồn gốc sâu xa</small><strong>Chủ nghĩa cá nhân</strong><p>Đặt lợi ích riêng lên trên lợi ích tập thể.</p></article><i>↓</i>
             <article><small>Môi trường dung túng</small><strong>Quan liêu</strong><p>Xa thực tế, xa quần chúng, thiếu kiểm tra và giám sát.</p></article><i>↓</i>
