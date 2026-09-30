@@ -82,10 +82,6 @@ export function Navbar() {
             { to: '/archive', label: 'Phòng tư liệu', description: 'Ảnh, văn kiện và phim' },
           ]} />
           <NavLink to="/ideas" onClick={close}>Hệ tư tưởng</NavLink>
-          <NavMenu label="Chuyên đề" active={pathname === '/ideas' && Boolean(hash)} onNavigate={close} links={[
-            { to: '/ideas#giac-noi-xam', label: '“Giặc ở bên trong”', description: 'Tham ô, lãng phí, quan liêu' },
-            { to: '/ideas#ban-do-tong-ket', label: 'Bản đồ tư tưởng', description: 'Kết nối toàn bộ khái niệm' },
-          ]} />
           <NavMenu label="Học tập" active={pathname === '/flashcards' || pathname === '/quiz'} onNavigate={close} links={[
             { to: '/flashcards', label: 'Flashcards', description: '72 thẻ ghi nhớ' },
             { to: '/quiz', label: 'Trắc nghiệm', description: '150 câu có giải thích' },
