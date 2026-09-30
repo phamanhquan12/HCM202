@@ -55,7 +55,7 @@ export function TimelinePage() {
           <footer className="journey-chapter-footer">
             <button type="button" disabled={activeIndex === 0} onClick={() => setActiveIndex((index) => index - 1)}>← Giai đoạn trước</button>
             <span>{activeIndex + 1} / {timelineStages.length}</span>
-            {activeIndex < timelineStages.length - 1 ? <button type="button" onClick={() => setActiveIndex((index) => index + 1)}>Giai đoạn tiếp →</button> : <Link to="/archive">Xem tư liệu →</Link>}
+            {activeIndex < timelineStages.length - 1 ? <button type="button" onClick={() => setActiveIndex((index) => index + 1)}>Giai đoạn tiếp →</button> : <Link to="/ideas">Tiếp tục: Hệ tư tưởng →</Link>}
           </footer>
         </article>
       </div>
