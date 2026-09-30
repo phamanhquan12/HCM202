@@ -23,7 +23,7 @@ const features = [
     number: '01',
     icon: 'cards' as const,
     title: 'Flashcards',
-    description: 'Ghi nhớ 41 khái niệm trọng tâm theo từng chương, tự đánh dấu phần đã thuộc.',
+    description: 'Ghi nhớ 72 chủ đề trọng tâm, cân bằng 12 thẻ cho mỗi chương và tự đánh dấu tiến độ.',
     to: '/flashcards',
     label: 'Bắt đầu ghi nhớ',
   },
@@ -39,7 +39,7 @@ const features = [
     number: '03',
     icon: 'quiz' as const,
     title: 'Quiz kiến thức',
-    description: 'Tự kiểm tra trọn bộ 24 câu hỏi và xem giải thích ngay sau mỗi câu trả lời.',
+    description: 'Tự kiểm tra với ngân hàng 150 câu hỏi cân bằng theo 6 chương, có giải thích sau mỗi đáp án.',
     to: '/quiz',
     label: 'Kiểm tra ngay',
   },
@@ -63,9 +63,9 @@ export function HomePage() {
             <Link className="text-link" to="/timeline">Xem dòng thời gian <span aria-hidden="true">↗</span></Link>
           </div>
           <div className="hero-meta" aria-label="Nội dung nền tảng">
-            <span><strong>41</strong> thẻ ghi nhớ</span>
+            <span><strong>72</strong> thẻ ghi nhớ</span>
             <span><strong>05</strong> giai đoạn</span>
-            <span><strong>24</strong> câu hỏi</span>
+            <span><strong>150</strong> câu hỏi</span>
           </div>
         </div>
 

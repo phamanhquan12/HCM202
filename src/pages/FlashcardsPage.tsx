@@ -57,7 +57,7 @@ export function FlashcardsPage() {
         eyebrow="Ghi nhớ khái niệm"
         title="Flashcards"
         description="Học theo chương, lật thẻ để xem giải thích và đánh dấu phần bạn đã nắm vững."
-        count="41 thẻ"
+        count="72 thẻ"
       />
 
       <div className="study-toolbar">

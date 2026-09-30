@@ -4,9 +4,10 @@ Nền tảng ôn tập trực quan cho học phần HCM202, giúp sinh viên h�
 
 ## Chức năng
 
-- 41 flashcard thuộc 6 chương, có lọc theo chương, trộn thẻ, chuyển thẻ và đánh dấu đã thuộc/cần ôn.
+- 72 flashcard chuyên sâu, cân bằng 12 thẻ cho mỗi chương, có lọc, trộn thẻ và đánh dấu đã thuộc/cần ôn.
 - Dòng thời gian gồm 5 giai đoạn hình thành và phát triển tư tưởng Hồ Chí Minh.
-- 24 câu hỏi trắc nghiệm trong bài tổng hợp; thứ tự được trộn ở mỗi lượt và có giải thích ngay sau khi trả lời.
+- Ngân hàng 150 câu hỏi trắc nghiệm, cân bằng 25 câu cho mỗi chương và có giải thích ngay sau khi trả lời.
+- Chế độ luyện tổng hợp 30 câu, làm đủ 25 câu theo chương hoặc thử sức với toàn bộ 150 câu.
 - Lưu tiến độ flashcard và điểm quiz tốt nhất bằng `localStorage`; không cần tài khoản hay máy chủ.
 - Giao diện đáp ứng cho máy tính, máy tính bảng và điện thoại.
 

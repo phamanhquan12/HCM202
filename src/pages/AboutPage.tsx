@@ -20,9 +20,9 @@ export function AboutPage() {
           </div>
         </article>
         <div className="about-principles">
-          <article><span>01</span><div><h3>Nhớ</h3><p>41 thẻ khái niệm từ 6 chương.</p></div></article>
+          <article><span>01</span><div><h3>Nhớ</h3><p>72 thẻ chuyên sâu, mỗi chương 12 thẻ.</p></div></article>
           <article><span>02</span><div><h3>Hiểu</h3><p>5 giai đoạn hình thành và phát triển.</p></div></article>
-          <article><span>03</span><div><h3>Tự kiểm tra</h3><p>24 câu hỏi có giải thích đáp án.</p></div></article>
+          <article><span>03</span><div><h3>Tự kiểm tra</h3><p>150 câu hỏi, mỗi chương 25 câu có giải thích.</p></div></article>
         </div>
       </div>
       <section className="source-panel">

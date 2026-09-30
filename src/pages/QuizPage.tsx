@@ -22,8 +22,17 @@ export function QuizPage() {
   const [bestScore, setBestScore] = useLocalStorage<number>('bestQuizScore', 0)
 
   const startQuiz = () => {
-    const pool = chapter === 0 ? quizQuestions : quizQuestions.filter((question) => question.chapter === chapter)
-    setQuestions(shuffle(pool))
+    const pool = chapter <= 0 ? quizQuestions : quizQuestions.filter((question) => question.chapter === chapter)
+    const questionSet = chapter === 0
+      ? shuffle([1, 2, 3, 4, 5, 6].flatMap((chapterNumber) =>
+          shuffle(pool.filter((question) => question.chapter === chapterNumber)).slice(0, 5),
+        ))
+      : shuffle(pool)
+    setQuestions(questionSet.map((question) => {
+      const correctOption = question.options[question.correctAnswer]
+      const options = shuffle(question.options)
+      return { ...question, options, correctAnswer: options.indexOf(correctOption) }
+    }))
     setCurrent(0)
     setSelected(null)
     setSubmitted(false)
@@ -69,14 +78,14 @@ export function QuizPage() {
           eyebrow="Tự kiểm tra kiến thức"
           title="Quiz"
           description="Chọn phạm vi, trả lời từng câu và xem giải thích ngay để hiểu vì sao đáp án đúng."
-          count="24 câu hỏi"
+          count="150 câu hỏi"
         />
         <section className="quiz-setup">
           <div className="quiz-setup-copy">
             <span className="eyebrow light">Sẵn sàng chưa?</span>
             <h2>Một lượt ôn tập ngắn,<br />một bước hiểu sâu hơn.</h2>
             <div className="quiz-rules">
-              <span><b>01</b> Đủ câu hỏi trong phạm vi đã chọn</span>
+              <span><b>01</b> 25 câu hỏi cho mỗi chương</span>
               <span><b>02</b> Giải thích sau mỗi câu</span>
               <span><b>03</b> Lưu điểm tốt nhất</span>
             </div>
@@ -85,7 +94,8 @@ export function QuizPage() {
             <label className="select-field">
               <span>Phạm vi câu hỏi</span>
               <select value={chapter} onChange={(event) => setChapter(Number(event.target.value))}>
-                <option value={0}>Tổng hợp 6 chương · 24 câu</option>
+                <option value={0}>Luyện tổng hợp · 30 / 150 câu</option>
+                <option value={-1}>Toàn bộ ngân hàng · 150 câu</option>
                 {Object.entries(chapterNames).map(([number, name]) => (
                   <option value={number} key={number}>
                     Chương {number} · {name} · {quizQuestions.filter((question) => question.chapter === Number(number)).length} câu
@@ -93,7 +103,7 @@ export function QuizPage() {
                 ))}
               </select>
             </label>
-            <p>Thứ tự câu hỏi được trộn ở mỗi lượt. Bài tổng hợp luôn có đủ 24 câu; bài theo chương dùng toàn bộ câu hỏi của chương đó.</p>
+            <p>Thứ tự luôn được trộn. Luyện tổng hợp lấy cân bằng 30 câu từ ngân hàng; bài theo chương dùng đủ 25 câu; bạn cũng có thể làm toàn bộ 150 câu.</p>
             <button className="button primary full" type="button" onClick={startQuiz}>Bắt đầu làm bài <span aria-hidden="true">→</span></button>
             <div className="best-score-note">Điểm tốt nhất quy đổi trên thiết bị này <strong>{bestScore} / 10</strong></div>
           </div>
