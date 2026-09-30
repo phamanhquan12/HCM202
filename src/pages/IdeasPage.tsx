@@ -1,6 +1,18 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ideaTopics, virtues } from '../data/ideas'
+import { ConnectedDiagram, type DiagramEdge } from '../components/ConnectedDiagram'
+import { SolidarityDiagram } from '../components/SolidarityDiagram'
+
+const topicEdges: DiagramEdge[] = ideaTopics.map((topic) => ({ from: 'topic-core', to: topic.id, toPort: 'left', route: 'branch' }))
+const peopleEdges: DiagramEdge[] = ['cua-dan', 'do-dan', 'vi-dan'].map((id) => ({ from: 'people', to: id, route: 'tree' }))
+const summaryEdges: DiagramEdge[] = [
+  { from: 'independence', to: 'socialism', fromPort: 'right', toPort: 'left' },
+  ...['party', 'state', 'solidarity'].map((to) => ({ from: 'socialism', to })),
+  ...['party', 'state', 'solidarity'].map((from) => ({ from, to: 'people' })),
+  ...['culture', 'ethics', 'human'].map((to) => ({ from: 'people', to })),
+  { from: 'ethics', to: 'integrity' },
+]
 
 export function IdeasPage() {
   const [activeTopicId, setActiveTopicId] = useState(ideaTopics[0].id)
@@ -28,11 +40,10 @@ export function IdeasPage() {
       <section className="idea-map-section" id="ban-do">
         <div className="section-shell">
           <header className="idea-map-heading"><div><span className="eyebrow light">Bản đồ khái niệm</span><h2>Từ độc lập đến con người</h2></div><p>Chọn một nút để đọc theo ba lớp: tư tưởng, bối cảnh và thực tiễn.</p></header>
-          <div className="idea-map" aria-label="Bản đồ hệ thống tư tưởng">
-            <div className="idea-map-axis" aria-hidden="true" />
-            {ideaTopics.map((topic) => <button key={topic.id} type="button" className={activeTopicId === topic.id ? 'active' : ''} onClick={() => selectTopic(topic.id)}><span>{topic.number}</span>{topic.shortTitle}</button>)}
-            <div className="idea-map-center"><small>Hạt nhân xuyên suốt</small><strong>Độc lập dân tộc<br />gắn liền với CNXH</strong></div>
-          </div>
+          <ConnectedDiagram className="topic-diagram" edges={topicEdges} label="Sáu chủ đề liên hệ với hạt nhân độc lập dân tộc gắn liền với chủ nghĩa xã hội">
+            <div className="topic-core" data-node="topic-core"><small>Hạt nhân xuyên suốt</small><strong>Độc lập dân tộc gắn liền với CNXH</strong></div>
+            {ideaTopics.map((topic) => <button key={topic.id} data-node={topic.id} type="button" aria-pressed={activeTopicId === topic.id} className={activeTopicId === topic.id ? 'active' : ''} onClick={() => selectTopic(topic.id)}><span>{topic.number}</span><strong>{topic.shortTitle}</strong><small>Khám phá chủ đề →</small></button>)}
+          </ConnectedDiagram>
         </div>
       </section>
 
@@ -48,23 +59,18 @@ export function IdeasPage() {
       <section className="people-concept" id="nhan-dan">
         <div className="section-shell people-concept-inner">
           <header><span className="eyebrow">Khái niệm kết nối</span><h2>Nhân dân</h2><p>Chủ thể của quyền lực, nguồn sức mạnh của đoàn kết, mục tiêu phục vụ của Nhà nước và động lực của cách mạng.</p></header>
-          <div className="people-diagram">
-            <div className="people-core"><small>Quyền lực thuộc về</small><strong>Nhân dân</strong></div>
-            <span className="people-line" aria-hidden="true" />
-            <div className="people-branches">
-              <article><b>Của dân</b><p>Nhân dân là chủ và có quyền kiểm soát quyền lực.</p></article>
-              <article><b>Do dân</b><p>Nhân dân thiết lập, tham gia quản lý và giám sát.</p></article>
-              <article><b>Vì dân</b><p>Nhà nước phục vụ lợi ích và nguyện vọng chính đáng.</p></article>
-            </div>
-          </div>
+          <ConnectedDiagram className="people-diagram" edges={peopleEdges} label="Nhân dân: của dân, do dân, vì dân">
+            <div className="people-core" data-node="people"><small>Quyền lực thuộc về</small><strong>Nhân dân</strong></div>
+            <article data-node="cua-dan"><small>Quyền lực</small><b>Của dân</b><p>Nhân dân là chủ và có quyền kiểm soát quyền lực.</p></article>
+            <article data-node="do-dan"><small>Thiết lập</small><b>Do dân</b><p>Nhân dân thiết lập, tham gia quản lý và giám sát.</p></article>
+            <article data-node="vi-dan"><small>Phục vụ</small><b>Vì dân</b><p>Nhà nước phục vụ lợi ích và nguyện vọng chính đáng.</p></article>
+          </ConnectedDiagram>
         </div>
       </section>
 
       <section className="solidarity-section section-shell" id="dai-doan-ket-truc-quan">
         <div className="solidarity-copy"><span className="eyebrow">Sức mạnh có tổ chức</span><h2>Đại đoàn kết</h2><p>Phạm vi đoàn kết là toàn thể dân tộc; nền tảng là liên minh Công–Nông–Trí; hình thức tổ chức là Mặt trận; chiều mở rộng là đoàn kết quốc tế.</p><a href="#idea-reading" onClick={() => setActiveTopicId('dai-doan-ket')}>Đọc chủ đề đầy đủ →</a></div>
-        <div className="solidarity-rings" aria-label="Các tầng của đại đoàn kết">
-          <div className="ring ring-global"><span>Đoàn kết quốc tế</span><div className="ring ring-nation"><span>Toàn dân tộc · dân tộc · tôn giáo · tầng lớp · kiều bào</span><div className="ring ring-front"><span>Mặt trận dân tộc thống nhất</span><div className="ring ring-foundation"><strong>Công · Nông · Trí</strong><small>Nền tảng</small></div></div></div></div>
-        </div>
+        <SolidarityDiagram />
       </section>
 
       <section className="ethics-section" id="dao-duc-truc-quan">
@@ -90,20 +96,19 @@ export function IdeasPage() {
       </section>
 
       <section className="knowledge-graph section-shell" id="ban-do-tong-ket">
-        <header><span className="eyebrow">Bản đồ tổng kết</span><h2>Một hệ thống, nhiều điểm nối</h2><p>Chọn một nút để quay lại phần tương ứng.</p></header>
-        <div className="knowledge-graph-canvas">
-          <span className="graph-lines" aria-hidden="true" />
-          <a className="graph-node n1" href="#idea-reading" onClick={() => setActiveTopicId('doc-lap-cnxh')}>Độc lập</a>
-          <a className="graph-node n2" href="#idea-reading" onClick={() => setActiveTopicId('doc-lap-cnxh')}>CNXH</a>
-          <a className="graph-node n3" href="#idea-reading" onClick={() => setActiveTopicId('dang-nha-nuoc')}>Đảng</a>
-          <a className="graph-node n4" href="#nhan-dan">Nhà nước</a>
-          <a className="graph-node n5 core" href="#nhan-dan">Nhân dân</a>
-          <a className="graph-node n6" href="#dai-doan-ket-truc-quan">Đại đoàn kết</a>
-          <a className="graph-node n7" href="#idea-reading" onClick={() => setActiveTopicId('van-hoa')}>Văn hóa</a>
-          <a className="graph-node n8" href="#dao-duc-truc-quan">Đạo đức</a>
-          <a className="graph-node n9" href="#idea-reading" onClick={() => setActiveTopicId('con-nguoi')}>Con người</a>
-          <a className="graph-node n10 danger" href="#giac-noi-xam">Chống chủ nghĩa cá nhân</a>
-        </div>
+        <header><div><span className="eyebrow">Bản đồ tổng kết</span><h2>Một hệ thống,<br />nhiều điểm nối</h2></div><p>Đọc từ trên xuống để theo dõi các mối liên hệ. Chọn một khái niệm để trở lại phần tương ứng.</p></header>
+        <ConnectedDiagram className="summary-diagram" edges={summaryEdges} label="Độc lập và chủ nghĩa xã hội liên hệ với Đảng, Nhà nước, đoàn kết, nhân dân, văn hóa, đạo đức và con người">
+          <a data-node="independence" href="#idea-reading" onClick={() => setActiveTopicId('doc-lap-cnxh')}><small>Quyền dân tộc</small><strong>Độc lập</strong></a>
+          <a data-node="socialism" href="#idea-reading" onClick={() => setActiveTopicId('doc-lap-cnxh')}><small>Con đường phát triển</small><strong>Chủ nghĩa xã hội</strong></a>
+          <a data-node="party" href="#idea-reading" onClick={() => setActiveTopicId('dang-nha-nuoc')}><small>Lãnh đạo</small><strong>Đảng</strong></a>
+          <a data-node="state" href="#nhan-dan"><small>Phục vụ</small><strong>Nhà nước</strong></a>
+          <a data-node="solidarity" href="#dai-doan-ket-truc-quan"><small>Tập hợp sức mạnh</small><strong>Đại đoàn kết</strong></a>
+          <a data-node="people" className="summary-core" href="#nhan-dan"><small>Chủ thể · Mục tiêu · Động lực</small><strong>Nhân dân</strong></a>
+          <a data-node="culture" href="#idea-reading" onClick={() => setActiveTopicId('van-hoa')}><small>Đời sống tinh thần</small><strong>Văn hóa</strong></a>
+          <a data-node="ethics" href="#dao-duc-truc-quan"><small>Nền tảng</small><strong>Đạo đức</strong></a>
+          <a data-node="human" href="#idea-reading" onClick={() => setActiveTopicId('con-nguoi')}><small>Phát triển toàn diện</small><strong>Con người</strong></a>
+          <a data-node="integrity" className="summary-integrity" href="#giac-noi-xam"><small>Cần · Kiệm · Liêm · Chính · Chí công vô tư</small><strong>Chống chủ nghĩa cá nhân</strong><span>Phòng chống tham ô, lãng phí, quan liêu →</span></a>
+        </ConnectedDiagram>
       </section>
     </main>
   )
